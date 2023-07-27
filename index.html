@@ -33,7 +33,7 @@
 		</div>
         <div class="colums" style="padding-bottom:10px;">
           <div class="item">
-            <label for="fname"> Vorname<span>*</span></label>
+            <label for="fname"> Vorname1<span>*</span></label>
             <input onchange="sendEmail()" id="fname" type="text" name="fname" required/>
           </div>
           <div class="item">
@@ -294,7 +294,6 @@
       var email = document.getElementById('eaddress').value;
       var action = "mailto:" + email + "&subject=" + subject + "&body=" + message + "&attachment=" + attachement;
       
-      console.log(action);
       link.setAttribute("action", action);
     }   
     
