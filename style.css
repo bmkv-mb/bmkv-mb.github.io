@@ -76,21 +76,30 @@ padding: 5px;
   color: gray;
 }
 
-.checkbox_highlight input[type=checkbox]:checked + span{
-  font-weight:bold;
-  color:black;
+.checkbox_highlight input[type=checkbox]:checked + span::before{
+	
+  content: "▣ ";
 }
 
-.radio_highlight input[type=radio] + span{
+.checkbox_highlight input[type=checkbox]:checked{
+	display:none;
+  
+}
+
+.radio_highlight input[type=radio] +  span{
   font-weight:normal;
   color: gray;
 }
 
-.radio_highlight input[type=radio]:checked + span{
-  font-weight:bold;
-  color:black;
+.radio_highlight input[type=radio]:checked +  span::before {
+
+	content: "⚈ ";
+}   
+
+.radio_highlight input[type=radio]:checked{
+	  display:none;
 }
-       
+
 input {
 width: calc(100% - 10px);
 padding: 5px;
