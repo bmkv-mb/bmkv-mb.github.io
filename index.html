@@ -35,10 +35,10 @@
 			<div style="padding-bottom:10px;" >
 				<legend>Anrede</legend> 
 				<div class="radio_highlight">
-					<input onchange="CreateEmailElement()" style="width:auto;" type="radio" name="gender" value="Frau" required > <span>Frau</span></input>
+					<input onchange="CreateEmailElement() & saveForm()" style="width:auto;" type="radio" name="gender" value="Frau" required> <span class="ref">Frau</span></input>
 				</div>
 				<div class="radio_highlight">
-					<input onchange="CreateEmailElement()" style="width:auto;" type="radio" name="gender" value="Herr"> <span>Herr</span></input>
+					<input onchange="CreateEmailElement()& saveForm()" style="width:auto;" type="radio" name="gender" value="Herr"> <span>Herr</span></input>
 				</div>
 			</div>
 				<!-- Empty -->
@@ -122,17 +122,17 @@
 			<div>
 				<!-- Empty -->
 			</div>
-			<div class="checkbox_highlight">
-				<input style="width:auto;" type="checkbox"> <span>Mündl. Empfehlung</span></input>
+			<div class="radio_highlight">
+				<input style="width:auto;" type="radio" name="checkboxFeedback"> <span>Mündl. Empfehlung</span></input>
 			</div>
-			<div class="checkbox_highlight">
-				<input style="width:auto;" type="checkbox"> <span>Ricardo-Newsletter</span></input>
+			<div class="radio_highlight">
+				<input style="width:auto;" type="radio" name="checkboxFeedback"> <span>Ricardo-Newsletter</span></input>
 			</div>
-			<div class="checkbox_highlight">
-				<input style="width:auto;" type="checkbox"> <span>Facebook / Instagram</span></input>
+			<div class="radio_highlight">
+				<input style="width:auto;" type="radio" name="checkboxFeedback"> <span>Facebook / Instagram</span></input>
 			</div>
-			<div class="checkbox_highlight">
-				<input style="width:auto;" type="checkbox"> <span>Flyer</span></input>
+			<div class="radio_highlight">
+				<input style="width:auto;" type="radio" name="checkboxFeedback"> <span>Flyer</span></input>
 			</div>
 			<div style="padding-top:5px;">
 				<label> Weitere: </label>
@@ -160,10 +160,14 @@
 			<button type="submit" id="submit" class="btn btn-default" >Submit</button>
 			<button onclick="window.location=CreateEmailElement(); return false;" id="submit2" class="btn btn-default" >Für Mitarbeiter</button>
 		</div>
+
 		<script id="rendered-js">
 		function saveForm() {
 		var name = document.getElementById('fname').value + ' ' + document.getElementById('lname').value;
 		html2canvas(document.querySelector('.testbox'), {
+		allowTaint: true,
+		foreignObjectRendering: true,
+		useCORS: true,
 		onrendered: function (canvas) {
 		//document.body.appendChild(canvas);
 		return Canvas2Image.saveAsPNG(canvas, canvas.width, canvas.height, name);
