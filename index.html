@@ -32,13 +32,18 @@
 			<h3>Personalien Neukunden</h3>
 		</div>
         <div class="colums" style="padding-bottom:10px;">
+		   <div class="item">
+            <label for="anrede"> Anrede<span>*</span></label>
+            <input onchange="CreateEmailElement()" id="anrede" type="text" name="anrede" required/>
+          </div>
+		  <div></div>
           <div class="item">
             <label for="fname"> Vorname<span>*</span></label>
-            <input onchange="sendEmail()" id="fname" type="text" name="fname" required/>
+            <input onchange="CreateEmailElement()" id="fname" type="text" name="fname" required/>
           </div>
           <div class="item">
             <label for="lname"> Nachname<span>*</span></label>
-            <input onchange="sendEmail()" id="lname" type="text" name="lname" required/>
+            <input onchange="CreateEmailElement()" id="lname" type="text" name="lname" required/>
           </div>
           <div class="item">
             <label for="address1">Addresse<span>*</span></label>
@@ -48,17 +53,17 @@
             <label for="postfach">Postfach</label>
             <input id="postfach" type="text"   name="postfach"/>
           </div>
-	  <div class="item">
-            <label for="plz">PLZ<span>*</span></label>
-            <input id="plz" type="text" name="plz" required/>
-          </div>
           <div class="item">
             <label for="city">Ort<span>*</span></label>
             <input id="city" type="text"   name="city" required/>
           </div>
           <div class="item">
+            <label for="plz">PLZ<span>*</span></label>
+            <input id="plz" type="text" name="plz" required/>
+          </div>
+          <div class="item">
             <label for="eaddress">Email-Addresse<span>*</span></label>
-            <input onchange="sendEmail()" id="eaddress" type="email" name="eaddress"  required/>
+            <input onchange="CreateEmailElement()" id="eaddress" type="email" name="eaddress"  required/>
           </div>
           <div class="item">
             <label for="phone">Telefonummer<span>*</span></label>
@@ -94,13 +99,14 @@
             <label for="alt_postfach">Postfach</label>
             <input id="alt_postfach" type="text" name="alt_postfach" />
           </div>
-          <div class="item" id="hidden_input" style="display: none;" name="hidden">
-            <label for="alt_plz">PLZ<span>*</span></label>
-            <input id="alt_plz" type="text" name="alt_plz" />
-          </div>
+
           <div class="item" id="hidden_input" style="display: none;" name="hidden">
             <label for="alt_city">Ort<span>*</span></label>
             <input id="alt_city" type="text" name="alt_city" />
+          </div>
+          <div class="item" id="hidden_input" style="display: none;" name="hidden">
+            <label for="alt_plz">PLZ<span>*</span></label>
+            <input id="alt_plz" type="text" name="alt_plz" />
           </div>
 		  <!-- BENÖTIGT? --> 
 		  <!--<div class="item" id="hidden_input" style="display: none;" name="hidden">
@@ -121,13 +127,13 @@
 		  <div class="checkbox_highlight">
 			<input style="width:auto;" type="checkbox"> <span>Mündl. Empfehlung</span></input>
 		  </div>
-		  <div class="checkbox_highlight">
+		  <div>
 			<input style="width:auto;" type="checkbox"> <span>Ricardo-Newsletter</span></input>
 		  </div>
-		  <div class="checkbox_highlight">
+		  <div>
 			<input style="width:auto;" type="checkbox"> <span>Facebook / Instagram</span></input>
 		  </div>
-		  <div class="checkbox_highlight">
+		  <div>
 			<input style="width:auto;" type="checkbox"> <span>Flyer</span></input>
 		  </div>
 		  <div style="padding-top:5px;">
@@ -154,16 +160,17 @@
           </div>
       </div>
       <div>
-        <button type="submit" id="submit" class="btn btn-default" href="/">Submit</button>
+        <button type="submit" id="submit" class="btn btn-default" >Submit</button>
       </div>
 
       <script id="rendered-js">
 
       function saveForm() {
+	  var name = document.getElementById('fname').value + ' ' + document.getElementById('lname').value;
       html2canvas(document.querySelector('.testbox'), {
       onrendered: function (canvas) {
       //document.body.appendChild(canvas);
-      return Canvas2Image.saveAsPNG(canvas);
+      return Canvas2Image.saveAsPNG(canvas, 1864, 1595, name);
       } });
     
       };
@@ -264,6 +271,7 @@
 
       //downloadLink.click();
 	  saveForm();
+	  CreateEmailElement();
     }
 
     function destroyClickedElement(event)
@@ -281,19 +289,21 @@
           }
         else{
           divs[i].style.display = "none";
-          }
-        }
+			  }
+			}
     }
-    function sendEmail() 
+    function CreateEmailElement() 
     {
       var link = document.getElementById('email_send');
       var name = document.getElementById('fname').value + ' ' + document.getElementById('lname').value;
-      var message = 'Sehr geehrte/r ' + name;
+	  var anrede = document.getElementById('anrede').value;
+      var message = 'Sehr geehrte/r ' + anrede + " " + name;
       var subject = 'Neuanmeldung und AGBs';
-      var attachement = 'C:/Users/miroslav.blascanin/Desktop/Restwert Formular/text.txt'
       var email = document.getElementById('eaddress').value;
-      var action = "mailto:" + email + "&subject=" + subject + "&body=" + message + "&attachment=" + attachement;
-      
+	  
+      var attachement = "<mailto:" + email + "&subject=" + subject + "&body=" + message+ ">";	  
+      var action = "mailto:" + "zuerich@projekt-restwert.ch" + "&subject=" + "Neuerfassung " + name + "&body=" + encodeURIComponent(attachement);
+	 
       console.log(action);
       link.setAttribute("action", action);
     }   
