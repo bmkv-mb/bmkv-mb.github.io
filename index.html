@@ -233,8 +233,8 @@
 		var subject = 'Neuanmeldung und AGBs';
 		var email = document.getElementById('eaddress').value;
 
-		var attachement = "<mailto:" + encodeURIComponent(email) + "&subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(message) + ">";	  
-		var action = "mailto:" + "zuerich@projekt-restwert.ch" + "&subject=" + "Neuerfassung " + encodeURIComponent(name) + "&body=" + encodeURIComponent(attachement);
+		var attachement = "<mailto:" + encodeURIComponent(email) + "?subject=" + encodeURIComponent(subject) + "?body=" + encodeURIComponent(message) + ">";	  
+		var action = "mailto:" + "zuerich@projekt-restwert.ch" + "?subject=" + "Neuerfassung " + encodeURIComponent(name) + "?body=" + encodeURIComponent(attachement);
 
 		return action;
 		//console.log(action);
